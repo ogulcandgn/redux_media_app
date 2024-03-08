@@ -16,7 +16,7 @@ const UsersList = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <SkeletonLoading />;
+    return <SkeletonLoading times={6} className="h-10 w-full" />;
   }
 
   if (error) {
