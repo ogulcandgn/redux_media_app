@@ -9,3 +9,4 @@ export const store = configureStore({
 
 //*bu dosyadan gelen her seyi dısarı aktar
 export * from "./thunks/fetchUsers";
+export * from "./thunks/addUsers";
