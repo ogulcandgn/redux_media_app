@@ -1,5 +1,11 @@
 {
-  "users": [{ "id": 1, "name": "Myra" }],
+  "users": [
+    { "id": 1, "name": "Myra" },
+    {
+      "id": 2,
+      "name": "Oğulcan"
+    }
+  ],
   "albums": [],
   "photos": []
 }
