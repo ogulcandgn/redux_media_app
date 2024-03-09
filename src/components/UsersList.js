@@ -6,7 +6,9 @@ import SkeletonLoading from "./Skeleton";
 
 const UsersList = () => {
   const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-  const [loadingUsersError, seLoadingUsersError] = useState(null);
+  const [loadingUsersError, setLoadingUsersError] = useState(null);
+  const [isCreatingUser, setIsCreatingUser] = useState(false);
+  const [creatingUserError, setCreatingUserError] = useState(null);
 
   const dispatch = useDispatch();
   const { data } = useSelector((state) => {
@@ -14,18 +16,28 @@ const UsersList = () => {
   });
 
   useEffect(() => {
+    setIsLoadingUsers(true);
     dispatch(fetchUsers())
       .unwrap()
-      .then(() => {
+      .catch((err) => {
+        setLoadingUsersError(err);
         setIsLoadingUsers(false);
       })
-      .catch((err) => {
-        setIsLoadingUsers(err);
+      .finally(() => {
+        setIsLoadingUsers(false);
       });
   }, [dispatch]);
 
   const handleUserAdd = () => {
-    dispatch(addUsers());
+    setIsCreatingUser(true);
+    dispatch(addUsers())
+      .unwrap()
+      .catch((err) => {
+        setCreatingUserError(err);
+      })
+      .finally(() => {
+        setCreatingUserError(false);
+      });
   };
 
   if (isLoadingUsers) {
