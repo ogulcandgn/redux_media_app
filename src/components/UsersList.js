@@ -1,30 +1,38 @@
-import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, addUsers } from "../store";
 import Button from "./Button";
 import SkeletonLoading from "./Skeleton";
 
 const UsersList = () => {
-  const dispatch = useDispatch();
+  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
+  const [loadingUsersError, seLoadingUsersError] = useState(null);
 
-  const { isLoading, data, error } = useSelector((state) => {
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => {
     return state.users;
   });
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchUsers())
+      .unwrap()
+      .then(() => {
+        setIsLoadingUsers(false);
+      })
+      .catch((err) => {
+        setIsLoadingUsers(err);
+      });
   }, [dispatch]);
 
   const handleUserAdd = () => {
     dispatch(addUsers());
   };
 
-  if (isLoading) {
+  if (isLoadingUsers) {
     return <SkeletonLoading times={6} className="h-10 w-full" />;
   }
 
-  if (error) {
+  if (loadingUsersError) {
     return <div>Error</div>;
   }
 
