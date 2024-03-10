@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers, addUsers } from "../store";
 import Button from "./Button";
@@ -9,7 +9,7 @@ function useThunk(thunk) {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
 
-  const runThunk = () => {
+  const runThunk = useCallback(() => {
     setIsLoading(true);
     dispatch(thunk())
       .unwrap()
@@ -21,7 +21,8 @@ function useThunk(thunk) {
       });
 
     return [isLoading, error, runThunk];
-  };
+  }, [dispatch, thunk]);
+  return [runThunk, error, isLoading];
 }
 
 const UsersList = () => {
@@ -36,7 +37,9 @@ const UsersList = () => {
     return state.users;
   });
 
-  useEffect(() => {}, [dispatch]);
+  useEffect(() => {
+    doFetchUsers();
+  }, [doFetchUsers]);
 
   const handleUserAdd = () => {
     setIsCreatingUser(true);
