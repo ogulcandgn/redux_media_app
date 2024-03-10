@@ -4,9 +4,30 @@ import { fetchUsers, addUsers } from "../store";
 import Button from "./Button";
 import SkeletonLoading from "./Skeleton";
 
+function useThunk(thunk) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const dispatch = useDispatch();
+
+  const runThunk = () => {
+    setIsLoading(true);
+    dispatch(thunk())
+      .unwrap()
+      .catch((err) => {
+        setError(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+
+    return [isLoading, error, runThunk];
+  };
+}
+
 const UsersList = () => {
-  const [isLoadingUsers, setIsLoadingUsers] = useState(false);
-  const [loadingUsersError, setLoadingUsersError] = useState(null);
+  const [doFetchUsers, isLoadingUsers, loadingUsersError] =
+    useThunk(fetchUsers);
+
   const [isCreatingUser, setIsCreatingUser] = useState(false);
   const [creatingUserError, setCreatingUserError] = useState(null);
 
@@ -15,18 +36,7 @@ const UsersList = () => {
     return state.users;
   });
 
-  useEffect(() => {
-    setIsLoadingUsers(true);
-    dispatch(fetchUsers())
-      .unwrap()
-      .catch((err) => {
-        setLoadingUsersError(err);
-        setIsLoadingUsers(false);
-      })
-      .finally(() => {
-        setIsLoadingUsers(false);
-      });
-  }, [dispatch]);
+  useEffect(() => {}, [dispatch]);
 
   const handleUserAdd = () => {
     setIsCreatingUser(true);
@@ -62,7 +72,6 @@ const UsersList = () => {
     <div>
       <div className="flex flex-row justify-between m-3">
         <h1 className="m-2 text-xl ">Users</h1>
-
         <Button loading={isCreatingUser} onClick={handleUserAdd}>
           + Add User
         </Button>
