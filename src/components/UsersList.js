@@ -4,27 +4,6 @@ import { fetchUsers, addUsers } from "../store";
 import Button from "./Button";
 import SkeletonLoading from "./Skeleton";
 
-function useThunk(thunk) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const dispatch = useDispatch();
-
-  const runThunk = useCallback(() => {
-    setIsLoading(true);
-    dispatch(thunk())
-      .unwrap()
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-
-    return [isLoading, error, runThunk];
-  }, [dispatch, thunk]);
-  return [runThunk, error, isLoading];
-}
-
 const UsersList = () => {
   const [doFetchUsers, isLoadingUsers, loadingUsersError] =
     useThunk(fetchUsers);
