@@ -4,7 +4,7 @@ import { fetchUsers, addUsers, removeUsers } from "../store";
 import Button from "./Button";
 import Skeleton from "./Skeleton";
 import { useThunk } from "../hooks/use-thunk";
-import { IoMdCloseCircle } from "react-icons/io";
+import UsersListItem from "./UsersListItem";
 
 function UsersList() {
   const [doFetchUsers, isLoadingUsers, loadingUsersError] =
@@ -36,20 +36,7 @@ function UsersList() {
     content = <div>Error fetching data...</div>;
   } else {
     content = data.map((user) => {
-      return (
-        <div key={user.id} className="my-2 border rounded flex items-center ">
-          <div>
-            <IoMdCloseCircle
-              onClick={handleUserDelete}
-              size={25}
-              className="ml-3 cursor-pointer"
-            />
-          </div>
-          <div className="flex p-2 justify-between items-center cursor-pointer">
-            {user.name}
-          </div>
-        </div>
-      );
+      return <UsersListItem user={user} key={user.id} />;
     });
   }
 
