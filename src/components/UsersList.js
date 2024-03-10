@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { fetchUsers, addUsers } from "../store";
+import { fetchUsers, addUsers, removeUsers } from "../store";
 import Button from "./Button";
 import Skeleton from "./Skeleton";
 import { useThunk } from "../hooks/use-thunk";
+import { IoMdCloseCircle } from "react-icons/io";
 
 function UsersList() {
   const [doFetchUsers, isLoadingUsers, loadingUsersError] =
     useThunk(fetchUsers);
   const [doCreateUser, isCreatingUser, creatingUserError] = useThunk(addUsers);
+  const [doDeleteUser] = useThunk(removeUsers);
+
   const { data } = useSelector((state) => {
     return state.users;
   });
@@ -21,6 +24,10 @@ function UsersList() {
     doCreateUser();
   };
 
+  const handleUserDelete = () => {
+    doDeleteUser();
+  };
+
   let content;
 
   if (isLoadingUsers) {
@@ -30,7 +37,14 @@ function UsersList() {
   } else {
     content = data.map((user) => {
       return (
-        <div key={user.id} className="mb-2 border rounded">
+        <div key={user.id} className="my-2 border rounded flex items-center ">
+          <div>
+            <IoMdCloseCircle
+              onClick={handleUserDelete}
+              size={25}
+              className="ml-3 cursor-pointer"
+            />
+          </div>
           <div className="flex p-2 justify-between items-center cursor-pointer">
             {user.name}
           </div>
