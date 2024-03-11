@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { fetchUsers, addUsers, removeUsers } from "../store";
+import { fetchUsers, addUsers } from "../store";
 import Button from "./Button";
 import Skeleton from "./Skeleton";
 import { useThunk } from "../hooks/use-thunk";
@@ -10,7 +10,6 @@ function UsersList() {
   const [doFetchUsers, isLoadingUsers, loadingUsersError] =
     useThunk(fetchUsers);
   const [doCreateUser, isCreatingUser, creatingUserError] = useThunk(addUsers);
-  const [doDeleteUser] = useThunk(removeUsers);
 
   const { data } = useSelector((state) => {
     return state.users;
@@ -22,10 +21,6 @@ function UsersList() {
 
   const handleUserAdd = () => {
     doCreateUser();
-  };
-
-  const handleUserDelete = () => {
-    doDeleteUser();
   };
 
   let content;
