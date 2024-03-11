@@ -19,14 +19,14 @@ const UsersListItem = ({ user }) => {
         onClick={handleUserDelete}
         style={{ border: "none" }}
       >
-        <IoMdCloseCircle size={23} className="ml-2" />
+        <IoMdCloseCircle size={23} />
       </Button>
       {error && <div>Error deleting user.</div>}
       {user.name}
     </>
   );
 
-  return;
+  return <ExpandablePanel header={header}>Content!!!</ExpandablePanel>;
 };
 
 export default UsersListItem;
