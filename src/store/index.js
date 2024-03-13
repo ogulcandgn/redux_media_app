@@ -7,9 +7,15 @@ import { albumsApi } from "./apis/albumsApi";
 export const store = configureStore({
   reducer: {
     users: usersReducer,
-    albums: albumsApi.reducer,
+    // albums: albumsApi.reducer,
+    [albumsApi.reducerPath]: albumsApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(albumsApi.middleware);
   },
 });
+
+setupListeners(store.dispatch);
 
 //*bu dosyadan gelen her seyi dısarı aktar
 export * from "./thunks/fetchUsers";
