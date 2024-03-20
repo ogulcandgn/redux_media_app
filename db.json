@@ -1,34 +1,28 @@
 {
   "users": [
     {
-      "id": "fb20",
-      "name": "Dr. Patsy Fritsch"
+      "id": 1,
+      "name": "Myra"
     },
     {
-      "id": "3d3b",
-      "name": "Jaime Jacobson"
+      "name": "Elsie Price",
+      "id": 3
     },
     {
-      "id": "f156",
-      "name": "Mrs. Melinda Turcotte"
+      "name": "Harold Strosin",
+      "id": 4
     },
     {
-      "id": "a901",
-      "name": "Ernest Kuvalis"
-    },
-    {
-      "id": "6909",
-      "name": "Herman Goyette"
-    },
-    {
-      "id": "e4a3",
-      "name": "Ora Kuhic"
-    },
-    {
-      "id": "93ba",
-      "name": "Grady Weimann"
+      "id": "0c49",
+      "name": "Christian Volkman"
     }
   ],
-  "albums": [],
+  "albums": [
+    {
+      "id": 10,
+      "title": "Hiking Trip",
+      "userId": 1
+    }
+  ],
   "photos": []
 }
