@@ -15,6 +15,10 @@
     {
       "id": "0c49",
       "name": "Christian Volkman"
+    },
+    {
+      "id": "ea9b",
+      "name": "Sheri Howell II"
     }
   ],
   "albums": [
@@ -77,6 +81,26 @@
       "id": "785c",
       "userId": 1,
       "title": "Generic Wooden Chair"
+    },
+    {
+      "id": "6d31",
+      "userId": 1,
+      "title": "Electronic Frozen Gloves"
+    },
+    {
+      "id": "d01d",
+      "userId": 1,
+      "title": "Unbranded Soft Shoes"
+    },
+    {
+      "id": "68ef",
+      "userId": 1,
+      "title": "Licensed Wooden Towels"
+    },
+    {
+      "id": "3ced",
+      "userId": 3,
+      "title": "Generic Concrete Computer"
     }
   ],
   "photos": []

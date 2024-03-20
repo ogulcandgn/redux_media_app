@@ -21,12 +21,7 @@ function AlbumsList({ user }) {
     content = <div>Error loading albums.</div>;
   } else {
     content = data.map((album) => {
-      const header = <div>{album.title}</div>;
-      return (
-        <ExpandablePanel key={album.id} header={header}>
-          List of photos in the album
-        </ExpandablePanel>
-      );
+      return <AlbumListItem key={album.id} album={album} />;
     });
   }
 
