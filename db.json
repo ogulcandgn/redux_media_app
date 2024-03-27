@@ -101,6 +101,31 @@
       "id": "3ced",
       "userId": 3,
       "title": "Generic Concrete Computer"
+    },
+    {
+      "id": "9de4",
+      "userId": 1,
+      "title": "Handmade Frozen Chair"
+    },
+    {
+      "id": "4d08",
+      "userId": 1,
+      "title": "Awesome Steel Chicken"
+    },
+    {
+      "id": "f736",
+      "userId": 1,
+      "title": "Practical Metal Ball"
+    },
+    {
+      "id": "2548",
+      "userId": 1,
+      "title": "Sleek Steel Keyboard"
+    },
+    {
+      "id": "115e",
+      "userId": 1,
+      "title": "Licensed Rubber Chips"
     }
   ],
   "photos": []
